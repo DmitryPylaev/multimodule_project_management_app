@@ -8,13 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>school-view</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>school-dto</module>
-        <module>school-controller</module>
-    </modules>
+
+    <artifactId>project-management-sys-model</artifactId>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>

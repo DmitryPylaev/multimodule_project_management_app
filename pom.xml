@@ -10,9 +10,11 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>school-app</module>
-        <module>school-business</module>
-        <module>school-view</module>
-        <module>school-persistence</module>
+        <module>project-management-sys-dao</module>
+        <module>project-management-sys-dto</module>
+        <module>project-management-sys-model</module>
+        <module>project-management-sys-service</module>
+        <module>project-management-sys-controller</module>
     </modules>
 
     <properties>
