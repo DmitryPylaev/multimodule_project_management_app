@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>school-app</module>
-        <module>project-management-system-dao</module>
+        <module>project-management-system-repository</module>
         <module>project-management-system-dto</module>
         <module>project-management-system-model</module>
         <module>project-management-system-service</module>
@@ -22,5 +22,15 @@
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
 
 </project>
