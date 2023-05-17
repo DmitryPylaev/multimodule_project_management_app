@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DataStorageImpl implements DataStorage {
+public class DataStorageFileIO implements DataStorage {
     private final String path = "C:\\YandexDisk\\employee.bin";
 
     @Override

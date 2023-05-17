@@ -1,14 +1,13 @@
 package com.digdes.java2023.repository.employee;
 
 import com.digdes.java2023.model.employee.Employee;
-import com.digdes.java2023.model.employee.EmployeeStatus;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
 
-class DataStorageImplTest {
-    DataStorageImpl dataStorage = new DataStorageImpl();
+class DataStorageFileIOTest {
+    DataStorage dataStorage = new DataStorageFileIO();
 
     @Test
     void create() {
@@ -19,7 +18,7 @@ class DataStorageImplTest {
         employee.setPosition("Java Developer");
         employee.setAccount("ivi");
         employee.setEmail("iv@mail.ru");
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
+        employee.setEmployeeStatus(1);
         employee.setId(1);
         dataStorage.create(employee);
     }
@@ -47,7 +46,7 @@ class DataStorageImplTest {
         employee.setPatronymic("Сергеевич");
         employee.setPosition("Developer");
         employee.setAccount("petr");
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
+        employee.setEmployeeStatus(1);
         employee.setId(2);
         dataStorage.create(employee);
 
