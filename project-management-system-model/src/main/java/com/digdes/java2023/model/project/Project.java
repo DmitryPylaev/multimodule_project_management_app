@@ -10,5 +10,5 @@ public class Project implements Serializable {
     private String code;
     private String name;
     private String description;
-    private ProjectStatus projectStatus;
+    private int projectStatus;
 }
