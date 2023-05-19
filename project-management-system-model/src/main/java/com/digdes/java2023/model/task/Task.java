@@ -14,8 +14,8 @@ public class Task implements Serializable {
     private Employee employee;
     private int estimate;
     private LocalDate deadline;
-    private int taskStatus;
-    private int author;
+    private TaskStatus taskStatus;
+    private Employee author;
     private LocalDate createDate;
     private LocalDate changeDate;
 }
