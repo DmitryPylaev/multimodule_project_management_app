@@ -18,20 +18,13 @@ public class EmployeeMapper {
     }
 
     public static Employee editEntity(EditEmployeeDto editEmployeeDto, Employee employeeOld) {
-        Employee employee = new Employee();
-        if (editEmployeeDto.getLastName() != null) employee.setLastName(editEmployeeDto.getLastName());
-        else employee.setLastName(employeeOld.getLastName());
-        if (editEmployeeDto.getName() != null) employee.setName(editEmployeeDto.getName());
-        else employee.setName(employeeOld.getName());
-        if (editEmployeeDto.getPatronymic() != null) employee.setPatronymic(editEmployeeDto.getPatronymic());
-        else employee.setPatronymic(employeeOld.getPatronymic());
-        if (editEmployeeDto.getPosition() != null) employee.setPosition(editEmployeeDto.getPosition());
-        else employee.setPosition(employeeOld.getPosition());
-        if (editEmployeeDto.getAccount() != null) employee.setAccount(editEmployeeDto.getAccount());
-        else employee.setAccount(employeeOld.getAccount());
-        if (editEmployeeDto.getEmail() != null) employee.setEmail(editEmployeeDto.getEmail());
-        else employee.setEmail(employeeOld.getEmail());
-        return employee;
+        if (editEmployeeDto.getLastName() != null) employeeOld.setLastName(editEmployeeDto.getLastName());
+        if (editEmployeeDto.getName() != null) employeeOld.setName(editEmployeeDto.getName());
+        if (editEmployeeDto.getPatronymic() != null) employeeOld.setPatronymic(editEmployeeDto.getPatronymic());
+        if (editEmployeeDto.getPosition() != null) employeeOld.setPosition(editEmployeeDto.getPosition());
+        if (editEmployeeDto.getAccount() != null) employeeOld.setAccount(editEmployeeDto.getAccount());
+        if (editEmployeeDto.getEmail() != null) employeeOld.setEmail(editEmployeeDto.getEmail());
+        return employeeOld;
     }
 
 
@@ -44,10 +37,10 @@ public class EmployeeMapper {
                 + " "
                 + employee.getPatronymic()
         );
-        employee.setPosition(employee.getPosition());
-        employee.setAccount(employee.getAccount());
-        employee.setEmail(employee.getEmail());
-        employee.setEmployeeStatus(employee.getEmployeeStatus());
+        employeeDto.setPosition(employee.getPosition());
+        employeeDto.setAccount(employee.getAccount());
+        employeeDto.setEmail(employee.getEmail());
+        employeeDto.setEmployeeStatus(employee.getEmployeeStatus());
         return employeeDto;
     }
 }
