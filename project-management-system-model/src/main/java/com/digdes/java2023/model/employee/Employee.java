@@ -8,12 +8,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "employee")
 @Getter
 @Setter
 @RequiredArgsConstructor
 public class Employee implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_seq")
     private long id;
 
     @Column(name = "lastname")

@@ -61,4 +61,6 @@ create table task
     constraint fk_author_id foreign key (fk_author_id) references employee (id)
 );
 
-drop database eduDigDes
+drop database eduDigDes;
+
+truncate table employee

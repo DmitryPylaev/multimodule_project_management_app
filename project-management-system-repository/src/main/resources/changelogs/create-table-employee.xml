@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
         <changeSet id="create-table-employee" author="pylaevDmitry">
             <createTable tableName="employee">
-                <column autoIncrement="true" name="id" type="int">
+                <column autoIncrement="true" name="id" type="bigint">
                     <constraints  primaryKey="true"  nullable="false"/>
                 </column>
                 <column name="lastname" type="varchar(50)">
