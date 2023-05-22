@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+        <changeSet id="create-table-employee" author="pylaevDmitry">
+            <createTable tableName="employee">
+                <column autoIncrement="true" name="id" type="int">
+                    <constraints  primaryKey="true"  nullable="false"/>
+                </column>
+                <column name="lastname" type="varchar(50)">
+                    <constraints  nullable="false"/>
+                </column>
+                <column name="name" type="varchar(50)">
+                    <constraints  nullable="false"/>
+                </column>
+                <column name="patronymic" type="varchar(50)">
+                </column>
+                <column name="position" type="varchar(50)">
+                </column>
+                <column name="account" type="varchar(50)">
+                    <constraints  unique="true"/>
+                </column>
+                <column name="email" type="varchar(50)">
+                </column>
+                <column name="employee_status" type="varchar(50)">
+                    <constraints  nullable="false"/>
+                </column>
+            </createTable>
+        </changeSet>
+    <include file="insert-ito_employee.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>
