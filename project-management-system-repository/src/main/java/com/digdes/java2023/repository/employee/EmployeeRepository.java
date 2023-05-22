@@ -1,8 +1,12 @@
 package com.digdes.java2023.repository.employee;
 
 import com.digdes.java2023.model.employee.Employee;
-import com.digdes.java2023.repository.BaseRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface EmployeeRepository extends BaseRepository<Employee> {
-    Employee getById(long id);
+import java.util.Optional;
+
+@Repository
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    Optional<Employee> findByAccount(String account);
 }

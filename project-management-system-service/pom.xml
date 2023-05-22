@@ -10,6 +10,42 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>project-management-system-service</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.digdes.2023</groupId>
+            <artifactId>project-management-system-dto</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.digdes.2023</groupId>
+            <artifactId>project-management-system-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.digdes.2023</groupId>
+            <artifactId>project-management-system-repository</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>2.7.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>2.7.11</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>

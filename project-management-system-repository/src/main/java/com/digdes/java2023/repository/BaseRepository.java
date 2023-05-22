@@ -1,6 +1,5 @@
 package com.digdes.java2023.repository;
 
-public interface BaseRepository<T> {
-    void save(T item);
+public interface BaseRepository<T>  {
     T find(String inputString);
 }
