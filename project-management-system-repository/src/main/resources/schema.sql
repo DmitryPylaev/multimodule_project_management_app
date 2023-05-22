@@ -10,7 +10,7 @@ create table employee
     position        varchar(50),
     account         varchar(50) unique,
     email           varchar(50),
-    employee_status int         not null
+    employee_status varchar(50) not null
 );
 
 insert into employee (lastname, name, patronymic, position, account, email, employee_status)
@@ -20,9 +20,11 @@ values ('Ivanov',
         'Java engineer',
         'iva',
         'i@ma.ru',
-        '1');
+        'ACTIVE');
 
-delete from employee where account = 'iva';
+delete
+from employee
+where account = 'iva';
 
 create table project
 (
@@ -30,15 +32,15 @@ create table project
     code           varchar(50) not null unique,
     name           varchar(50) not null,
     description    varchar(255),
-    project_status int         not null
+    project_status varchar(50) not null
 );
 
 create table project_assignment
 (
     id             serial primary key,
-    fk_project_id      int not null,
-    fk_employee_id int not null,
-    project_role   int not null,
+    fk_project_id  int         not null,
+    fk_employee_id int         not null,
+    project_role   varchar(50) not null,
     constraint fk_employee_id foreign key (fk_employee_id) references employee (id),
     constraint fk_project_id foreign key (fk_project_id) references project (id)
 );
@@ -51,12 +53,12 @@ create table task
     fk_employee_id int,
     estimate       int         not null check ( estimate > 0 ),
     deadline       varchar(50) not null,
-    task_status    int         not null,
+    task_status    varchar(50) not null,
     fk_author_id   int         not null,
-    create_date    date not null,
-    change_date    date not null,
+    create_date    date        not null,
+    change_date    date        not null,
     constraint fk_employee_id foreign key (fk_employee_id) references employee (id),
     constraint fk_author_id foreign key (fk_author_id) references employee (id)
 );
 
-drop table task
+drop database eduDigDes
