@@ -23,37 +23,41 @@ public class EmployeeService {
         employeeRepository = repo;
     }
 
-    public static void create(EditEmployeeDto employeeDto) {
+    public static EmployeeDto create(EditEmployeeDto employeeDto) {
         Employee employee = EmployeeMapper.createEntity(employeeDto);
         employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
-        EmployeeService.employeeRepository.save(employee);
+        employeeRepository.save(employee);
+        return EmployeeMapper.mapFromEntity(employee);
     }
 
-    static void edit(EditEmployeeDto employeeDto) {
-        Optional<Employee> employeeFromBase = EmployeeService.employeeRepository.findByAccount(employeeDto.getAccount());
+    public static EmployeeDto edit(EditEmployeeDto employeeDto) {
+        Optional<Employee> employeeFromBase = employeeRepository.findByAccount(employeeDto.getAccount());
         if (employeeFromBase.isPresent()) {
             Employee employeeToSave = EmployeeMapper.editEntity(employeeDto, employeeFromBase.get());
-            EmployeeService.employeeRepository.save(employeeToSave);
+            employeeRepository.save(employeeToSave);
+            return EmployeeMapper.mapFromEntity(employeeToSave);
         }
+        return new EmployeeDto();
     }
 
-    static void delete(long id) {
-        Employee employee = EmployeeService.employeeRepository.getReferenceById(id);
+    public static EmployeeDto delete(long id) {
+        Employee employee = employeeRepository.getReferenceById(id);
         employee.setEmployeeStatus(EmployeeStatus.REMOVED.toString());
-        EmployeeService.employeeRepository.save(employee);
+        employeeRepository.save(employee);
+        return EmployeeMapper.mapFromEntity(employee);
     }
 
-    static EmployeeDto get(long id) {
-        return EmployeeMapper.mapFromEntity(EmployeeService.employeeRepository.getReferenceById(id));
+    public static EmployeeDto get(long id) {
+        return EmployeeMapper.mapFromEntity(employeeRepository.getReferenceById(id));
     }
 
-    static EmployeeDto get(String account) {
-        return EmployeeMapper.mapFromEntity(EmployeeService.employeeRepository.findByAccount(account).orElseThrow());
+    public static EmployeeDto get(String account) {
+        return EmployeeMapper.mapFromEntity(employeeRepository.findByAccount(account).orElseThrow());
     }
 
-    static List<Employee> find(String input) {
-        List<Employee> employeeList = EmployeeService.employeeRepository.findAll().stream().filter(o-> !EmployeeStatus.valueOf(o.getEmployeeStatus()).equals(EmployeeStatus.REMOVED)).toList();
-        List<Employee> result = new ArrayList<>();
+    public static List<EmployeeDto> find(String input) {
+        List<Employee> employeeList = employeeRepository.findAll().stream().filter(o-> !EmployeeStatus.valueOf(o.getEmployeeStatus()).equals(EmployeeStatus.REMOVED)).toList();
+        List<EmployeeDto> result = new ArrayList<>();
         for (Employee employee : employeeList) {
             StringJoiner joiner = new StringJoiner(" ");
             joiner.add(employee.getLastName());
@@ -61,7 +65,7 @@ public class EmployeeService {
             joiner.add(employee.getPatronymic());
             joiner.add(employee.getAccount());
             joiner.add(employee.getEmail());
-            if (joiner.toString().contains(input)) result.add(employee);
+            if (joiner.toString().contains(input)) result.add(EmployeeMapper.mapFromEntity(employee));
         }
         return result;
     }

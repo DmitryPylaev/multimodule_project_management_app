@@ -2,7 +2,6 @@ package com.digdes.java2023.service;
 
 import com.digdes.java2023.dto.employee.EditEmployeeDto;
 import com.digdes.java2023.dto.employee.EmployeeDto;
-import com.digdes.java2023.model.employee.Employee;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -45,7 +44,7 @@ class EmployeeServiceTest {
 
     @Test
     void find() {
-        List<Employee> employeeList = EmployeeService.find("mail");
+        List<EmployeeDto> employeeList = EmployeeService.find("mail");
     }
 
     @Test
