@@ -6,7 +6,7 @@ import com.digdes.java2023.mapping.EmployeeMapper;
 import com.digdes.java2023.model.employee.Employee;
 import com.digdes.java2023.model.employee.EmployeeStatus;
 import com.digdes.java2023.repository.employee.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,22 +15,18 @@ import java.util.Optional;
 import java.util.StringJoiner;
 
 @Service
+@AllArgsConstructor
 public class EmployeeService {
-    private static EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
-    @Autowired
-    private void setEmployeeRepository (EmployeeRepository repo) {
-        employeeRepository = repo;
-    }
-
-    public static EmployeeDto create(EditEmployeeDto employeeDto) {
+    public EmployeeDto create(EditEmployeeDto employeeDto) {
         Employee employee = EmployeeMapper.createEntity(employeeDto);
         employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
         employeeRepository.save(employee);
         return EmployeeMapper.mapFromEntity(employee);
     }
 
-    public static EmployeeDto edit(EditEmployeeDto employeeDto) {
+    public EmployeeDto edit(EditEmployeeDto employeeDto) {
         Optional<Employee> employeeFromBase = employeeRepository.findByAccount(employeeDto.getAccount());
         if (employeeFromBase.isPresent()) {
             Employee employeeToSave = EmployeeMapper.editEntity(employeeDto, employeeFromBase.get());
@@ -40,22 +36,22 @@ public class EmployeeService {
         return new EmployeeDto();
     }
 
-    public static EmployeeDto delete(long id) {
+    public EmployeeDto delete(long id) {
         Employee employee = employeeRepository.getReferenceById(id);
         employee.setEmployeeStatus(EmployeeStatus.REMOVED.toString());
         employeeRepository.save(employee);
         return EmployeeMapper.mapFromEntity(employee);
     }
 
-    public static EmployeeDto get(long id) {
+    public EmployeeDto get(long id) {
         return EmployeeMapper.mapFromEntity(employeeRepository.getReferenceById(id));
     }
 
-    public static EmployeeDto get(String account) {
+    public EmployeeDto get(String account) {
         return EmployeeMapper.mapFromEntity(employeeRepository.findByAccount(account).orElseThrow());
     }
 
-    public static List<EmployeeDto> find(String input) {
+    public List<EmployeeDto> find(String input) {
         List<Employee> employeeList = employeeRepository.findAll().stream().filter(o-> !EmployeeStatus.valueOf(o.getEmployeeStatus()).equals(EmployeeStatus.REMOVED)).toList();
         List<EmployeeDto> result = new ArrayList<>();
         for (Employee employee : employeeList) {
