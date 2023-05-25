@@ -30,6 +30,8 @@ class EmployeeControllerTest {
                         "    \"position\": \"spec\",\n" +
                         "    \"account\":\"sw\",\n" +
                         "    \"email\": \"aka@gmail.com\"\n" +
+                        "    \"username\": \"user2\"\n" +
+                        "    \"password\": \"333\"\n" +
                         "}"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +
@@ -100,6 +102,8 @@ class EmployeeControllerTest {
                                 "    \"position\": \"Java Developer\",\n" +
                                 "    \"account\":\"ivi\",\n" +
                                 "    \"email\": \"iv@mail.ru\"\n" +
+                                "    \"username\": \"user1\"\n" +
+                                "    \"password\": \"123\"\n" +
                                 "}"))
                 .andExpect(status().isOk());
 

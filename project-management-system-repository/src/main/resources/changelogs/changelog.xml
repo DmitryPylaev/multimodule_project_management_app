@@ -6,5 +6,5 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <include file="create-table-employee.xml" relativeToChangelogFile="true"/>
-<!--    <include file="insert-ito_employee.xml" relativeToChangelogFile="true"/>-->
+    <include file="add-column-auth-to-employee.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

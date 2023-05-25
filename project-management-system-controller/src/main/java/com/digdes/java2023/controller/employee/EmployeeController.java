@@ -1,5 +1,6 @@
 package com.digdes.java2023.controller.employee;
 
+import com.digdes.java2023.dto.employee.CreateEmployeeDto;
 import com.digdes.java2023.dto.employee.EditEmployeeDto;
 import com.digdes.java2023.dto.employee.EmployeeDto;
 import com.digdes.java2023.service.EmployeeService;
@@ -20,7 +21,7 @@ public class EmployeeController {
 
     @Operation(summary = "Внесение сотрудника")
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public EmployeeDto create(@RequestBody EditEmployeeDto employeeDto) {
+    public EmployeeDto create(@RequestBody CreateEmployeeDto employeeDto) {
         return employeeService.create(employeeDto);
     }
 

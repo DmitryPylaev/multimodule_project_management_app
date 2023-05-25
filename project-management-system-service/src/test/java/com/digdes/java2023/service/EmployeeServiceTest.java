@@ -1,5 +1,6 @@
 package com.digdes.java2023.service;
 
+import com.digdes.java2023.dto.employee.CreateEmployeeDto;
 import com.digdes.java2023.dto.employee.EditEmployeeDto;
 import com.digdes.java2023.dto.employee.EmployeeDto;
 import org.junit.jupiter.api.Test;
@@ -15,13 +16,15 @@ class EmployeeServiceTest {
 
     @Test
     void create() {
-        EditEmployeeDto employee = new EditEmployeeDto();
+        CreateEmployeeDto employee = new CreateEmployeeDto();
         employee.setLastName("Иванов");
         employee.setName("Петр");
         employee.setPatronymic("Сергеевич");
         employee.setPosition("Java Developer");
         employee.setAccount("ivi");
         employee.setEmail("iv@mail.ru");
+        employee.setUsername("user1");
+        employee.setPassword("123");
         employeeService.create(employee);
     }
 
@@ -36,7 +39,7 @@ class EmployeeServiceTest {
 
     @Test
     void getById() {
-        EmployeeDto employee = employeeService.get(-41);
+        EmployeeDto employee = employeeService.get(-33);
         System.out.println(employee);
     }
 
@@ -53,6 +56,6 @@ class EmployeeServiceTest {
 
     @Test
     void deleteById() {
-        employeeService.delete(-41);
+        employeeService.delete(-33);
     }
 }

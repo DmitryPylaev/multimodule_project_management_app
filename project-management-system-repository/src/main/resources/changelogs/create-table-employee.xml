@@ -29,5 +29,4 @@
                 </column>
             </createTable>
         </changeSet>
-    <include file="insert-ito_employee.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

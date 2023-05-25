@@ -1,5 +1,6 @@
 package com.digdes.java2023.service;
 
+import com.digdes.java2023.dto.employee.CreateEmployeeDto;
 import com.digdes.java2023.dto.employee.EditEmployeeDto;
 import com.digdes.java2023.dto.employee.EmployeeDto;
 import com.digdes.java2023.mapping.EmployeeMapper;
@@ -19,7 +20,7 @@ import java.util.StringJoiner;
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
-    public EmployeeDto create(EditEmployeeDto employeeDto) {
+    public EmployeeDto create(CreateEmployeeDto employeeDto) {
         Employee employee = EmployeeMapper.createEntity(employeeDto);
         employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
         employeeRepository.save(employee);

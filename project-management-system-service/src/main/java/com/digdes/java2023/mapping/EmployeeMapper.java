@@ -1,19 +1,23 @@
 package com.digdes.java2023.mapping;
 
+import com.digdes.java2023.dto.employee.CreateEmployeeDto;
 import com.digdes.java2023.dto.employee.EditEmployeeDto;
 import com.digdes.java2023.dto.employee.EmployeeDto;
 import com.digdes.java2023.model.employee.Employee;
+import com.digdes.java2023.model.employee.EmployeeStatus;
 
 public class EmployeeMapper {
-    public static Employee createEntity(EditEmployeeDto editEmployeeDto) {
+    public static Employee createEntity(CreateEmployeeDto createEmployeeDto) {
         Employee employee = new Employee();
-        employee.setLastName(editEmployeeDto.getLastName());
-        employee.setName(editEmployeeDto.getName());
-        employee.setPatronymic(editEmployeeDto.getPatronymic());
-        employee.setPosition(editEmployeeDto.getPosition());
-        employee.setAccount(editEmployeeDto.getAccount());
-        employee.setEmail(editEmployeeDto.getEmail());
-        employee.setEmployeeStatus(employee.getEmployeeStatus());
+        employee.setLastName(createEmployeeDto.getLastName());
+        employee.setName(createEmployeeDto.getName());
+        employee.setPatronymic(createEmployeeDto.getPatronymic());
+        employee.setPosition(createEmployeeDto.getPosition());
+        employee.setAccount(createEmployeeDto.getAccount());
+        employee.setEmail(createEmployeeDto.getEmail());
+        employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
+        employee.setUsername(createEmployeeDto.getUsername());
+        employee.setPassword(createEmployeeDto.getPassword());
         return employee;
     }
 

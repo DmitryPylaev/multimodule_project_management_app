@@ -37,4 +37,11 @@ public class Employee implements Serializable {
 
     @Column(name = "employee_status")
     private String employeeStatus;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
+
 }
