@@ -1,6 +1,8 @@
-package com.digdes.java2023.repository.employee;
+package com.digdes.java2023.plain_java_repository.impl;
 
 import com.digdes.java2023.model.employee.Employee;
+import com.digdes.java2023.plain_java_repository.DataStorage;
+import com.digdes.java2023.plain_java_repository.EmployeeElector;
 
 import java.io.*;
 import java.nio.file.Files;

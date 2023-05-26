@@ -1,4 +1,4 @@
-package com.digdes.java2023.repository;
+package com.digdes.java2023.plain_java_repository.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -6,7 +6,7 @@ import com.digdes.java2023.dto.employee.EmployeeDto;
 import com.digdes.java2023.mapping.EmployeeMapper;
 import com.digdes.java2023.model.employee.Employee;
 import com.digdes.java2023.model.employee.EmployeeStatus;
-import com.digdes.java2023.repository.employee.EmployeeRepository;
+import com.digdes.java2023.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

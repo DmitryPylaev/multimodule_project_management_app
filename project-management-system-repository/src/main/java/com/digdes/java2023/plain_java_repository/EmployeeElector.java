@@ -1,4 +1,4 @@
-package com.digdes.java2023.repository.employee;
+package com.digdes.java2023.plain_java_repository;
 
 import com.digdes.java2023.model.employee.Employee;
 

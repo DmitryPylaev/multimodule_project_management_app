@@ -2,7 +2,7 @@ package com.digdes.java2023.service;
 
 import com.digdes.java2023.model.employee.Employee;
 import com.digdes.java2023.model.employee.EmployeeStatus;
-import com.digdes.java2023.repository.employee.EmployeeRepository;
+import com.digdes.java2023.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
