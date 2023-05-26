@@ -7,4 +7,7 @@
 
     <include file="create-table-employee.xml" relativeToChangelogFile="true"/>
     <include file="add-column-auth-to-employee.xml" relativeToChangelogFile="true"/>
+    <include file="create-table-project.xml" relativeToChangelogFile="true"/>
+    <include file="create-table-project-assignment.xml" relativeToChangelogFile="true"/>
+    <include file="create-table-task.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

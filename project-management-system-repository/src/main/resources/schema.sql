@@ -52,7 +52,7 @@ create table task
     description    varchar(255),
     fk_employee_id int,
     estimate       int         not null check ( estimate > 0 ),
-    deadline       varchar(50) not null,
+    deadline       date not null,
     task_status    varchar(50) not null,
     fk_author_id   int         not null,
     create_date    date        not null,
