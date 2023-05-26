@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -22,6 +23,7 @@ class EmployeeControllerTest {
     @Test
     void create() throws Exception {
         this.mvc.perform(post("/employee/create")
+                        .with(user("root").password("root"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "    \"lastName\": \"svetlova\",\n" +
@@ -46,6 +48,7 @@ class EmployeeControllerTest {
     @Test
     void edit() throws Exception {
         this.mvc.perform(post("/employee/edit")
+                        .with(user("user2").password("333"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\n" +
                                 "    \"lastName\": \"svetlovo\",\n" +
@@ -67,7 +70,8 @@ class EmployeeControllerTest {
 
     @Test
     void getById() throws Exception {
-        this.mvc.perform(get("/employee/get_by_id/-35"))
+        this.mvc.perform(get("/employee/get_by_id/-32")
+                .with(user("user2").password("333")))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +
                         "    \"displayName\": \"svetlovo elena vitalyevna\",\n" +
@@ -80,7 +84,8 @@ class EmployeeControllerTest {
 
     @Test
     void getByAccount() throws Exception {
-        this.mvc.perform(get("/employee/get_by_account/sw"))
+        this.mvc.perform(get("/employee/get_by_account/sw")
+                .with(user("user2").password("333")))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +
                         "    \"displayName\": \"svetlovo elena vitalyevna\",\n" +
@@ -94,6 +99,7 @@ class EmployeeControllerTest {
     @Test
     void find() throws Exception {
         this.mvc.perform(post("/employee/create")
+                        .with(user("user2").password("333"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\n" +
                                 "    \"lastName\": \"Иванов\",\n" +
@@ -107,7 +113,8 @@ class EmployeeControllerTest {
                                 "}"))
                 .andExpect(status().isOk());
 
-        this.mvc.perform(get("/employee/find?input=ail"))
+        this.mvc.perform(get("/employee/find?input=ail")
+                        .with(user("user2").password("333")))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[\n" +
                         "    {\n" +
@@ -129,7 +136,8 @@ class EmployeeControllerTest {
 
     @Test
     void delete() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.delete("/employee/-35"))
+        this.mvc.perform(MockMvcRequestBuilders.delete("/employee/-35")
+                        .with(user("user2").password("333")))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +
                         "    \"displayName\": \"svetlovo elena vitalyevna\",\n" +

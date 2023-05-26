@@ -8,6 +8,7 @@ import com.digdes.java2023.model.employee.Employee;
 import com.digdes.java2023.model.employee.EmployeeStatus;
 import com.digdes.java2023.repository.employee.EmployeeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,9 +20,11 @@ import java.util.StringJoiner;
 @AllArgsConstructor
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
+    private PasswordEncoder passwordEncoder;
 
     public EmployeeDto create(CreateEmployeeDto employeeDto) {
         Employee employee = EmployeeMapper.createEntity(employeeDto);
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
         employeeRepository.save(employee);
         return EmployeeMapper.mapFromEntity(employee);
