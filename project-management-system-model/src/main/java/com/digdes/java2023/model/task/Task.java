@@ -1,5 +1,7 @@
 package com.digdes.java2023.model.task;
 
+import com.digdes.java2023.model.employee.Employee;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -18,37 +20,36 @@ import java.time.LocalDate;
 public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_id_seq")
+    @EqualsAndHashCode.Exclude
     private long id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "name")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "name")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_employee_id")
-    private long fk_employee_id;
+    private Employee employee;
 
-    @Column(name = "name")
+    @Column(name = "estimate")
     private int estimate;
 
-    @Column(name = "name")
+    @Column(name = "deadline")
     private LocalDate deadline;
 
-    @Column(name = "name")
-    private TaskStatus taskStatus;
+    @Column(name = "task_status")
+    private String taskStatus;
 
-    @Column(name = "name")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_author_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private long fk_author_id;
+    private Employee author;
 
-    @Column(name = "name")
+    @Column(name = "createDate")
     private LocalDate createDate;
 
-    @Column(name = "name")
+    @Column(name = "changeDate")
     private LocalDate changeDate;
 }

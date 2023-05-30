@@ -1,5 +1,6 @@
 package com.digdes.java2023.model.employee;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_seq")
+    @EqualsAndHashCode.Exclude
     private long id;
 
     @Column(name = "lastname")

@@ -1,5 +1,8 @@
 package com.digdes.java2023.model.crew;
 
+import com.digdes.java2023.model.employee.Employee;
+import com.digdes.java2023.model.project.Project;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -16,19 +19,18 @@ import javax.persistence.*;
 public class ProjectAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_assignment_id_seq")
+    @EqualsAndHashCode.Exclude
     private long id;
 
-    @Column(name = "fk_project_id")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_project_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private long fk_project_id;
+    private Project project;
 
-    @Column(name = "fk_employee_id")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_employee_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private long fk_employee_id;
+    private Employee employee;
 
     @Column(name = "project_role")
     private String project_role;
