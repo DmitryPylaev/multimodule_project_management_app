@@ -1,6 +1,7 @@
 package com.digdes.java2023.plain_java_repository.impl;
 
 import com.digdes.java2023.model.employee.Employee;
+import com.digdes.java2023.model.employee.EmployeeStatus;
 import com.digdes.java2023.plain_java_repository.DataStorage;
 import com.digdes.java2023.plain_java_repository.util.ConnectionBuilder;
 
@@ -24,7 +25,7 @@ public class DataStorageJDBC implements DataStorage {
             preparedStatement.setString(4, employee.getPosition());
             preparedStatement.setString(5, employee.getAccount());
             preparedStatement.setString(6, employee.getEmail());
-            preparedStatement.setString(7, employee.getEmployeeStatus());
+            preparedStatement.setString(7, employee.getEmployeeStatus().toString());
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) employee.setId(generatedKeys.getLong("id"));
@@ -66,7 +67,7 @@ public class DataStorageJDBC implements DataStorage {
                 employee.setPosition(resultSet.getString("position"));
                 employee.setAccount(resultSet.getString("account"));
                 employee.setEmail(resultSet.getString("email"));
-                employee.setEmployeeStatus(resultSet.getString("employee_status"));
+                employee.setEmployeeStatus(EmployeeStatus.valueOf(resultSet.getString("employee_status")));
                 employee.setId(resultSet.getLong("id"));
             }
         } catch (SQLException e) {
@@ -91,7 +92,7 @@ public class DataStorageJDBC implements DataStorage {
                 employee.setPosition(resultSet.getString("position"));
                 employee.setAccount(resultSet.getString("account"));
                 employee.setEmail(resultSet.getString("email"));
-                employee.setEmployeeStatus(resultSet.getString("employee_status"));
+                employee.setEmployeeStatus(EmployeeStatus.valueOf(resultSet.getString("employee_status")));
                 employee.setId(resultSet.getLong("id"));
                 result.add(employee);
             }

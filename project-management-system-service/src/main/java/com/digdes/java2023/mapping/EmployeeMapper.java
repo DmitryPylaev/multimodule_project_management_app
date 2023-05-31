@@ -15,7 +15,7 @@ public class EmployeeMapper {
         employee.setPosition(createEmployeeDto.getPosition());
         employee.setAccount(createEmployeeDto.getAccount());
         employee.setEmail(createEmployeeDto.getEmail());
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
+        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
         employee.setUsername(createEmployeeDto.getUsername());
         employee.setPassword(createEmployeeDto.getPassword());
         return employee;
@@ -31,8 +31,6 @@ public class EmployeeMapper {
         return employeeOld;
     }
 
-
-
     public static EmployeeDto mapFromEntity(Employee employee) {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setDisplayName(employee.getLastName()
@@ -44,7 +42,7 @@ public class EmployeeMapper {
         employeeDto.setPosition(employee.getPosition());
         employeeDto.setAccount(employee.getAccount());
         employeeDto.setEmail(employee.getEmail());
-        employeeDto.setEmployeeStatus(employee.getEmployeeStatus());
+        employeeDto.setEmployeeStatus(employee.getEmployeeStatus().toString());
         return employeeDto;
     }
 }

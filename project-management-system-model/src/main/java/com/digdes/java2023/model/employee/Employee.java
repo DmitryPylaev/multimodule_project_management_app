@@ -38,7 +38,8 @@ public class Employee implements Serializable {
     private String email;
 
     @Column(name = "employee_status")
-    private String employeeStatus;
+    @Enumerated(EnumType.STRING)
+    private EmployeeStatus employeeStatus;
 
     @Column(name = "username")
     private String username;

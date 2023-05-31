@@ -25,7 +25,7 @@ public class EmployeeService {
     public EmployeeDto create(CreateEmployeeDto employeeDto) {
         Employee employee = EmployeeMapper.createEntity(employeeDto);
         employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
+        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
         employeeRepository.save(employee);
         return EmployeeMapper.mapFromEntity(employee);
     }
@@ -42,7 +42,7 @@ public class EmployeeService {
 
     public EmployeeDto delete(long id) {
         Employee employee = employeeRepository.getReferenceById(id);
-        employee.setEmployeeStatus(EmployeeStatus.REMOVED.toString());
+        employee.setEmployeeStatus(EmployeeStatus.REMOVED);
         employeeRepository.save(employee);
         return EmployeeMapper.mapFromEntity(employee);
     }

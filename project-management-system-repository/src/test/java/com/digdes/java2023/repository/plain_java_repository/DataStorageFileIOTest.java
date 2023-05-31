@@ -21,7 +21,7 @@ class DataStorageFileIOTest {
         employee.setPosition("Java Developer");
         employee.setAccount("ivi");
         employee.setEmail("iv@mail.ru");
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
+        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
         employee.setId(1);
         dataStorage.create(employee);
     }
@@ -49,7 +49,7 @@ class DataStorageFileIOTest {
         employee.setPatronymic("Сергеевич");
         employee.setPosition("Developer");
         employee.setAccount("petr");
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
+        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
         employee.setId(2);
         dataStorage.create(employee);
 

@@ -40,7 +40,8 @@ public class Task implements Serializable {
     private LocalDate deadline;
 
     @Column(name = "task_status")
-    private String taskStatus;
+    @Enumerated(EnumType.STRING)
+    private TaskStatus taskStatus;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_author_id", nullable = false)

@@ -21,7 +21,7 @@ class DataStorageJDBCTest {
         employee.setPosition("Java Developer");
         employee.setAccount("ivi");
         employee.setEmail("iv@mail.ru");
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
+        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
         dataStorage.create(employee);
     }
 
@@ -48,7 +48,7 @@ class DataStorageJDBCTest {
         employee.setPatronymic("Сергеевич");
         employee.setPosition("Developer");
         employee.setAccount("petr");
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
+        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
         dataStorage.create(employee);
 
         List<Employee> employeeList = dataStorage.getAll();

@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Employee employee = new Employee();
         employee.setLastName("admin");
         employee.setName("admin");
-        employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
+        employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
         employee.setUsername("root");
         employee.setPassword(passwordEncoder.encode("root"));
         Optional<Employee> admin = employeeRepository.findByUsername("root");

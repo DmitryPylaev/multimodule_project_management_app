@@ -29,5 +29,6 @@ public class Project implements Serializable {
     private String description;
 
     @Column(name = "project_status")
+    @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
 }

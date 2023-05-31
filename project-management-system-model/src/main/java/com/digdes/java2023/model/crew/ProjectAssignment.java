@@ -33,5 +33,6 @@ public class ProjectAssignment {
     private Employee employee;
 
     @Column(name = "project_role")
-    private String project_role;
+    @Enumerated(EnumType.STRING)
+    private ProjectRole project_role;
 }
