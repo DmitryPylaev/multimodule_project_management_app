@@ -56,7 +56,13 @@ public class EmployeeService {
     }
 
     public List<EmployeeDto> find(String input) {
-        List<Employee> employeeList = employeeRepository.findAll().stream().filter(o-> !EmployeeStatus.valueOf(o.getEmployeeStatus()).equals(EmployeeStatus.REMOVED)).toList();
+        List<Employee> employeeList = employeeRepository.findByEmployeeStatusAndLastNameContainingOrNameContainingOrPatronymicContainingOrAccountContainingOrEmailContaining(
+                "ACTIVE",
+                input,
+                input,
+                input,
+                input,
+                input);
         List<EmployeeDto> result = new ArrayList<>();
         for (Employee employee : employeeList) {
             StringJoiner joiner = new StringJoiner(" ");
