@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -35,7 +36,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         employee.setEmployeeStatus(EmployeeStatus.ACTIVE.toString());
         employee.setUsername("root");
         employee.setPassword(passwordEncoder.encode("root"));
-        Employee admin = employeeRepository.findByUsername("root")
-                .orElse(employeeRepository.save(employee));
+        Optional<Employee> admin = employeeRepository.findByUsername("root");
+        if (admin.isEmpty()) {
+            employeeRepository.save(employee);
+        }
     }
 }
