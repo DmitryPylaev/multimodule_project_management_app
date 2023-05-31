@@ -24,16 +24,16 @@ class EmployeeControllerTest {
     void create() throws Exception {
         this.mvc.perform(post("/employee/create")
                         .with(user("root").password("root"))
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content("{\n" +
                         "    \"lastName\": \"svetlova\",\n" +
                         "    \"name\": \"elena\",\n" +
                         "    \"patronymic\": \"vitalyevna\",\n" +
                         "    \"position\": \"spec\",\n" +
                         "    \"account\":\"sw\",\n" +
-                        "    \"email\": \"aka@gmail.com\"\n" +
-                        "    \"username\": \"user2\"\n" +
-                        "    \"password\": \"333\"\n" +
+                        "    \"email\": \"aka@gmail.com\",\n" +
+                        "    \"username\":\"user2\",\n" +
+                        "    \"password\":\"333\"\n" +
                         "}"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +
@@ -49,7 +49,7 @@ class EmployeeControllerTest {
     void edit() throws Exception {
         this.mvc.perform(post("/employee/edit")
                         .with(user("user2").password("333"))
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\n" +
                                 "    \"lastName\": \"svetlovo\",\n" +
                                 "    \"name\": \"elena\",\n" +
@@ -70,7 +70,7 @@ class EmployeeControllerTest {
 
     @Test
     void getById() throws Exception {
-        this.mvc.perform(get("/employee/get_by_id/-32")
+        this.mvc.perform(get("/employee/get_by_id/25")
                 .with(user("user2").password("333")))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +
@@ -99,17 +99,17 @@ class EmployeeControllerTest {
     @Test
     void find() throws Exception {
         this.mvc.perform(post("/employee/create")
-                        .with(user("user2").password("333"))
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(user("root").password("root"))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\n" +
-                                "    \"lastName\": \"Иванов\",\n" +
-                                "    \"name\": \"Петр\",\n" +
-                                "    \"patronymic\": \"Сергеевич\",\n" +
+                                "    \"lastName\": \"Ivanov\",\n" +
+                                "    \"name\": \"Petr\",\n" +
+                                "    \"patronymic\": \"Sergeevich\",\n" +
                                 "    \"position\": \"Java Developer\",\n" +
                                 "    \"account\":\"ivi\",\n" +
-                                "    \"email\": \"iv@mail.ru\"\n" +
-                                "    \"username\": \"user1\"\n" +
-                                "    \"password\": \"123\"\n" +
+                                "    \"email\": \"iv@mail.com\",\n" +
+                                "    \"username\":\"user1\",\n" +
+                                "    \"password\":\"123\"\n" +
                                 "}"))
                 .andExpect(status().isOk());
 
@@ -118,10 +118,10 @@ class EmployeeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("[\n" +
                         "    {\n" +
-                        "        \"displayName\": \"Иванов Петр Сергеевич\",\n" +
+                        "        \"displayName\": \"Ivanov Petr Sergeevich\",\n" +
                         "        \"position\": \"Java Developer\",\n" +
                         "        \"account\": \"ivi\",\n" +
-                        "        \"email\": \"iv@mail.ru\",\n" +
+                        "        \"email\": \"iv@mail.com\",\n" +
                         "        \"employeeStatus\": \"ACTIVE\"\n" +
                         "    },\n" +
                         "    {\n" +
@@ -136,7 +136,7 @@ class EmployeeControllerTest {
 
     @Test
     void delete() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.delete("/employee/-35")
+        this.mvc.perform(MockMvcRequestBuilders.delete("/employee/26")
                         .with(user("user2").password("333")))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +
