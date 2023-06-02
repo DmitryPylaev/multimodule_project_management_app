@@ -6,11 +6,9 @@ import com.digdes.java2023.dto.employee.EmployeeDto;
 import com.digdes.java2023.model.employee.EmployeeStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,33 +20,16 @@ import java.util.List;
 @ComponentScan("com.digdes.java2023")
 @EnableJpaRepositories("com.digdes.java2023.repository")
 @EntityScan(basePackages = "com.digdes.java2023.model")
-class EmployeeServiceTest {
+class EmployeeServiceTest extends BaseTest {
+    private static final long id = 12;
     @Autowired
     EmployeeService employeeService;
 
-    @MockBean
+    @Autowired
     PasswordEncoder passwordEncoder;
-
-//    @BeforeEach
-    void setUp() {
-        Mockito.when(passwordEncoder.encode("123")).thenReturn("$2a$10$ebZ5zesT6p5ltv4bh4qYFe0c8WEcvQR4pmo9OkbqQ");
-
-        CreateEmployeeDto employee = new CreateEmployeeDto();
-        employee.setLastName("Иванов");
-        employee.setName("Петр");
-        employee.setPatronymic("Сергеевич");
-        employee.setPosition("Java Developer");
-        employee.setAccount("iva");
-        employee.setEmail("iv@mail.ru");
-        employee.setUsername("user1");
-        employee.setPassword("123");
-        employeeService.create(employee);
-    }
 
     @Test
     void create() {
-        Mockito.when(passwordEncoder.encode("111")).thenReturn("$2a$10$ebZ5zesT6p5ltv4bh4qYFe0c8WEcvQR4pmo9OkbqQ");
-
         CreateEmployeeDto employee = new CreateEmployeeDto();
         employee.setLastName("Петров");
         employee.setName("Петр");
@@ -69,6 +50,8 @@ class EmployeeServiceTest {
 
     @Test
     void edit() {
+        create();
+
         EditEmployeeDto employee = new EditEmployeeDto();
         employee.setPosition("Middle Developer");
         employee.setAccount("petr");
@@ -84,20 +67,24 @@ class EmployeeServiceTest {
 
     @Test
     void getById() {
+        create();
+
         EmployeeDto expect = new EmployeeDto();
         expect.setDisplayName("Петров Петр Сергеевич");
-        expect.setPosition("Middle Developer");
+        expect.setPosition("Developer");
         expect.setAccount("petr");
         expect.setEmployeeStatus(EmployeeStatus.ACTIVE);
 
-        Assertions.assertEquals(expect, employeeService.get(13));
+        Assertions.assertEquals(expect, employeeService.get(id));
     }
 
     @Test
     void getByAccount() {
+        create();
+
         EmployeeDto expect = new EmployeeDto();
         expect.setDisplayName("Петров Петр Сергеевич");
-        expect.setPosition("Middle Developer");
+        expect.setPosition("Developer");
         expect.setAccount("petr");
         expect.setEmployeeStatus(EmployeeStatus.ACTIVE);
 
@@ -106,7 +93,7 @@ class EmployeeServiceTest {
 
     @Test
     void find() {
-        Mockito.when(passwordEncoder.encode("123")).thenReturn("$2a$10$ebZ5zesT6p5ltv4bh4qYFe0c8WEcvQR4pmo9OkbqQ");
+        create();
 
         CreateEmployeeDto employee = new CreateEmployeeDto();
         employee.setLastName("Иванов");
@@ -133,13 +120,15 @@ class EmployeeServiceTest {
 
     @Test
     void deleteById() {
+        create();
+
         EmployeeDto expect = new EmployeeDto();
         expect.setDisplayName("Иванов Петр Павлович");
-        expect.setPosition("Java Developer");
+        expect.setPosition("Developer");
         expect.setAccount("ivi");
         expect.setEmail("iv@mail.ru");
         expect.setEmployeeStatus(EmployeeStatus.REMOVED);
 
-        Assertions.assertEquals(expect, employeeService.delete(20));
+        Assertions.assertEquals(expect, employeeService.delete(id));
     }
 }
