@@ -57,7 +57,7 @@ public class EmployeeService {
 
     public List<EmployeeDto> find(String input) {
         List<Employee> employeeList = employeeRepository.findByEmployeeStatusAndLastNameContainingOrNameContainingOrPatronymicContainingOrAccountContainingOrEmailContaining(
-                "ACTIVE",
+                EmployeeStatus.ACTIVE,
                 input,
                 input,
                 input,

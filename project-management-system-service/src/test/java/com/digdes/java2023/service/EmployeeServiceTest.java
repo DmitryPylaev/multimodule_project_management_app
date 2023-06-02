@@ -3,6 +3,7 @@ package com.digdes.java2023.service;
 import com.digdes.java2023.dto.employee.CreateEmployeeDto;
 import com.digdes.java2023.dto.employee.EditEmployeeDto;
 import com.digdes.java2023.dto.employee.EmployeeDto;
+import com.digdes.java2023.model.employee.EmployeeStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -61,7 +62,7 @@ class EmployeeServiceTest {
         expect.setDisplayName("Петров Петр Сергеевич");
         expect.setPosition("Developer");
         expect.setAccount("petr");
-        expect.setEmployeeStatus("ACTIVE");
+        expect.setEmployeeStatus(EmployeeStatus.ACTIVE);
 
         Assertions.assertEquals(expect, employeeService.create(employee));
     }
@@ -76,7 +77,7 @@ class EmployeeServiceTest {
         expect.setDisplayName("Петров Петр Сергеевич");
         expect.setPosition("Middle Developer");
         expect.setAccount("petr");
-        expect.setEmployeeStatus("ACTIVE");
+        expect.setEmployeeStatus(EmployeeStatus.ACTIVE);
 
         Assertions.assertEquals(expect, employeeService.edit(employee));
     }
@@ -87,7 +88,7 @@ class EmployeeServiceTest {
         expect.setDisplayName("Петров Петр Сергеевич");
         expect.setPosition("Middle Developer");
         expect.setAccount("petr");
-        expect.setEmployeeStatus("ACTIVE");
+        expect.setEmployeeStatus(EmployeeStatus.ACTIVE);
 
         Assertions.assertEquals(expect, employeeService.get(13));
     }
@@ -98,7 +99,7 @@ class EmployeeServiceTest {
         expect.setDisplayName("Петров Петр Сергеевич");
         expect.setPosition("Middle Developer");
         expect.setAccount("petr");
-        expect.setEmployeeStatus("ACTIVE");
+        expect.setEmployeeStatus(EmployeeStatus.ACTIVE);
 
         Assertions.assertEquals(expect, employeeService.get("petr"));
     }
@@ -123,7 +124,7 @@ class EmployeeServiceTest {
         expect1.setPosition("Java Developer");
         expect1.setAccount("ivi");
         expect1.setEmail("iv@mail.ru");
-        expect1.setEmployeeStatus("ACTIVE");
+        expect1.setEmployeeStatus(EmployeeStatus.ACTIVE);
 
         List<EmployeeDto> employeeDtoList = new ArrayList<>();
         employeeDtoList.add(expect1);
@@ -137,7 +138,7 @@ class EmployeeServiceTest {
         expect.setPosition("Java Developer");
         expect.setAccount("ivi");
         expect.setEmail("iv@mail.ru");
-        expect.setEmployeeStatus("REMOVED");
+        expect.setEmployeeStatus(EmployeeStatus.REMOVED);
 
         Assertions.assertEquals(expect, employeeService.delete(20));
     }
