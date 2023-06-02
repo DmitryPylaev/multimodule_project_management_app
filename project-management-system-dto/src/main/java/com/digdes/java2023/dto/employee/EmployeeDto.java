@@ -1,5 +1,6 @@
 package com.digdes.java2023.dto.employee;
 
+import com.digdes.java2023.model.employee.EmployeeStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -20,5 +21,5 @@ public class EmployeeDto {
     private String email;
 
     @Schema(description = "Статус сотрудника (ACTIVE, REMOVED)")
-    private String employeeStatus;
+    private EmployeeStatus employeeStatus;
 }

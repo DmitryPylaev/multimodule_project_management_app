@@ -70,7 +70,7 @@ class EmployeeControllerTest {
 
     @Test
     void getById() throws Exception {
-        this.mvc.perform(get("/employee/get_by_id/25")
+        this.mvc.perform(get("/employee/get_by_id/41")
                 .with(user("user2").password("333")))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +
@@ -122,21 +122,21 @@ class EmployeeControllerTest {
                         "        \"position\": \"Java Developer\",\n" +
                         "        \"account\": \"ivi\",\n" +
                         "        \"email\": \"iv@mail.com\",\n" +
-                        "        \"employeeStatus\": \"ACTIVE\"\n" +
+                        "    \"employeeStatus\": \"ACTIVE\"\n" +
                         "    },\n" +
                         "    {\n" +
                         "        \"displayName\": \"svetlovo elena vitalyevna\",\n" +
                         "        \"position\": \"specialist\",\n" +
                         "        \"account\": \"sw\",\n" +
                         "        \"email\": \"aka@gmail.com\",\n" +
-                        "        \"employeeStatus\": \"ACTIVE\"\n" +
+                        "    \"employeeStatus\": \"ACTIVE\"\n" +
                         "    }\n" +
                         "]"));
     }
 
     @Test
     void delete() throws Exception {
-        this.mvc.perform(MockMvcRequestBuilders.delete("/employee/26")
+        this.mvc.perform(MockMvcRequestBuilders.delete("/employee/41")
                         .with(user("user2").password("333")))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\n" +

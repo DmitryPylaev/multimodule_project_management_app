@@ -42,7 +42,7 @@ public class EmployeeMapper {
         employeeDto.setPosition(employee.getPosition());
         employeeDto.setAccount(employee.getAccount());
         employeeDto.setEmail(employee.getEmail());
-        employeeDto.setEmployeeStatus(employee.getEmployeeStatus().toString());
+        employeeDto.setEmployeeStatus(employee.getEmployeeStatus());
         return employeeDto;
     }
 }
