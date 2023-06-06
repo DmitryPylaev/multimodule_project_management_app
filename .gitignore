@@ -18,5 +18,7 @@ target/
 *.iml
 *.ipr
 
+*.log
+
 application.properties
 liquibase.properties
