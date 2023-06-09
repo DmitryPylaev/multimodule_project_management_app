@@ -8,6 +8,7 @@
     <artifactId>digDesSchool</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+<!--    <version>${revision}${changelist}</version>-->
     <modules>
         <module>school-app</module>
         <module>project-management-system-repository</module>
@@ -18,6 +19,8 @@
     </modules>
 
     <properties>
+        <revision>0.1</revision>
+        <changelist>-SNAPSHOT</changelist>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
@@ -30,14 +33,6 @@
             <version>1.18.26</version>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
 </project>
