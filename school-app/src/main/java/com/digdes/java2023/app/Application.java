@@ -1,4 +1,4 @@
-package com.digdes.java2023;
+package com.digdes.java2023.app;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("com.digdes.java2023")
 @EnableJpaRepositories("com.digdes.java2023.repository")
 @EntityScan(basePackages = "com.digdes.java2023.model")
-public class Main {
+public class Application {
     public static void main(String[] args) {
-        ApplicationContext context = new SpringApplicationBuilder(Main.class).headless(false).run(args);
+        ApplicationContext context = new SpringApplicationBuilder(Application.class).headless(false).run(args);
     }
 }
