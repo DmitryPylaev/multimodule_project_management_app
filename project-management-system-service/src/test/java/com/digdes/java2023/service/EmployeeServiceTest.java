@@ -7,6 +7,7 @@ import com.digdes.java2023.model.employee.EmployeeStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-@SpringBootTest
+@SpringBootTest(classes = {EmployeeService.class})
+@EnableAutoConfiguration
 @ComponentScan("com.digdes.java2023")
 @EnableJpaRepositories("com.digdes.java2023.repository")
 @EntityScan(basePackages = "com.digdes.java2023.model")
