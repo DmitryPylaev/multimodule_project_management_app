@@ -1,4 +1,4 @@
-package com.digdes.java2023.controller;
+package com.digdes.java2023;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

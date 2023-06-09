@@ -1,4 +1,4 @@
-package com.digdes.java2023.controller.employee;
+package com.digdes.java2023.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

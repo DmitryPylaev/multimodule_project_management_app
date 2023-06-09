@@ -1,4 +1,4 @@
-package com.digdes.java2023.service;
+package com.digdes.java2023.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

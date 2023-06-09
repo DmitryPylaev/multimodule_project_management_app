@@ -1,4 +1,4 @@
-package com.digdes.java2023.controller.employee;
+package com.digdes.java2023.controller;
 
 import com.digdes.java2023.amqp.MessageProducer;
 import com.digdes.java2023.dto.employee.CreateEmployeeDto;
