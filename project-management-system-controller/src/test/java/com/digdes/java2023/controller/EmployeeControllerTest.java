@@ -1,9 +1,14 @@
 package com.digdes.java2023.controller;
 
+import com.digdes.java2023.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -14,9 +19,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(classes = {EmployeeController.class})
+@EnableAutoConfiguration
+@ComponentScan("com.digdes.java2023")
+@EnableJpaRepositories("com.digdes.java2023.repository")
+@EntityScan(basePackages = "com.digdes.java2023.model")
 @AutoConfigureMockMvc
 class EmployeeControllerTest {
+    @Autowired
+    EmployeeRepository employeeRepository;
+
     @Autowired
     private MockMvc mvc;
 
