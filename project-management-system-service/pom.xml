@@ -5,7 +5,7 @@
     <parent>
         <artifactId>digDesSchool</artifactId>
         <groupId>com.digdes.2023</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}${changelist}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,21 +14,21 @@
         <dependency>
             <groupId>com.digdes.2023</groupId>
             <artifactId>project-management-system-dto</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${revision}${changelist}</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>com.digdes.2023</groupId>
             <artifactId>project-management-system-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${revision}${changelist}</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>com.digdes.2023</groupId>
             <artifactId>project-management-system-repository</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${revision}${changelist}</version>
             <scope>compile</scope>
         </dependency>
 
