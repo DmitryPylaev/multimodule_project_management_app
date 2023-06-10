@@ -6,8 +6,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Configuration;
 
-import javax.mail.MessagingException;
-
 @Configuration
 public class MessageConsumer {
 
@@ -20,7 +18,7 @@ public class MessageConsumer {
     }
 
     @RabbitListener(queues = "${rabbitmq.queue}")
-    public void receiveMessage(Message message) throws MessagingException {
+    public void receiveMessage(Message message) throws jakarta.mail.MessagingException {
         testMailSender.send("lesson 8 test");
     }
 }
