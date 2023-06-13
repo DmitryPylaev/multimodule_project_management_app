@@ -10,4 +10,5 @@
     <include file="create-table-project.xml" relativeToChangelogFile="true"/>
     <include file="create-table-project-assignment.xml" relativeToChangelogFile="true"/>
     <include file="create-table-task.xml" relativeToChangelogFile="true"/>
+    <include file="modify-datatype-task-times.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
