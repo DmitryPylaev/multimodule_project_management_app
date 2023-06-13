@@ -12,13 +12,13 @@ import org.hibernate.annotations.OnDeleteAction;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "project_assignment")
+@Table(name = "project-assignment")
 @Getter
 @Setter
 @RequiredArgsConstructor
 public class ProjectAssignment {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_assignment_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project-assignment_id_seq")
     @EqualsAndHashCode.Exclude
     private long id;
 

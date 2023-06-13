@@ -1,10 +1,11 @@
 package com.digdes.java2023.dto.crew;
 
+import com.digdes.java2023.dto.employee.EmployeeDto;
+import com.digdes.java2023.model.crew.ProjectRole;
 import lombok.Data;
-
-import java.util.Map;
 //Данные на выход по операции "Получить всех участников проекта"
 @Data
 public class CrewDto {
-    private Map<String, String> members;
+    private EmployeeDto employee;
+    private ProjectRole projectRole;
 }
