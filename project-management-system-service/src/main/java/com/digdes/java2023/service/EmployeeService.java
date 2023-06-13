@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.StringJoiner;
 
 @Service
 @AllArgsConstructor
@@ -65,13 +64,7 @@ public class EmployeeService {
                 input);
         List<EmployeeDto> result = new ArrayList<>();
         for (Employee employee : employeeList) {
-            StringJoiner joiner = new StringJoiner(" ");
-            joiner.add(employee.getLastName());
-            joiner.add(employee.getName());
-            joiner.add(employee.getPatronymic());
-            joiner.add(employee.getAccount());
-            joiner.add(employee.getEmail());
-            if (joiner.toString().contains(input)) result.add(EmployeeMapper.mapFromEntity(employee));
+            result.add(EmployeeMapper.mapFromEntity(employee));
         }
         return result;
     }
