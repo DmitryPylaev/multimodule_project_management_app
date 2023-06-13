@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class EditTaskDto {
     private String name;
+    private String description;
+    private String employee;
     private int estimate;
     private String deadline;
 }

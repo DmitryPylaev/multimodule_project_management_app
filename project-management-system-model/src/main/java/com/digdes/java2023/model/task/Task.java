@@ -1,6 +1,7 @@
 package com.digdes.java2023.model.task;
 
 import com.digdes.java2023.model.employee.Employee;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,12 +9,12 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "project")
+@Table(name = "task")
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -49,8 +50,8 @@ public class Task implements Serializable {
     private Employee author;
 
     @Column(name = "createDate")
-    private LocalDate createDate;
+    private LocalDateTime createDate;
 
     @Column(name = "changeDate")
-    private LocalDate changeDate;
+    private LocalDateTime changeDate;
 }

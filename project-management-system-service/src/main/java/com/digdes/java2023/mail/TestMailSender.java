@@ -18,14 +18,14 @@ import java.util.Map;
 public class TestMailSender {
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
-    private final String address;
+    public static String address;
 
     public TestMailSender(JavaMailSender mailSender,
                           SpringTemplateEngine templateEngine,
-                          @Value("${spring.mail.username}") String address) {
+                          @Value("${spring.mail.username}") String a) {
         this.mailSender = mailSender;
         this.templateEngine = templateEngine;
-        this.address = address;
+        address = a;
     }
 
     public void send(String text) throws jakarta.mail.MessagingException {

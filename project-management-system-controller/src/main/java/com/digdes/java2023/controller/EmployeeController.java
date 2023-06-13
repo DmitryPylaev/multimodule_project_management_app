@@ -1,6 +1,5 @@
 package com.digdes.java2023.controller;
 
-import com.digdes.java2023.amqp.MessageProducer;
 import com.digdes.java2023.dto.employee.CreateEmployeeDto;
 import com.digdes.java2023.dto.employee.EditEmployeeDto;
 import com.digdes.java2023.dto.employee.EmployeeDto;
@@ -21,13 +20,11 @@ import java.util.List;
 @Tag(name = "EmployeeController", description = "Контроллер сотрудника")
 public class EmployeeController {
     EmployeeService employeeService;
-    MessageProducer messageProducer;
 
     @Operation(summary = "Внесение сотрудника")
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public EmployeeDto create(@RequestBody CreateEmployeeDto employeeDto) {
         log.info("В методе контроллера Employee::create");
-        messageProducer.sendMessage();
         return employeeService.create(employeeDto);
     }
 

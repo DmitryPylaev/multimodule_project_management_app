@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MessageConsumer {
+    public static String messageText = "lesson 8 test";
 
     private final RabbitTemplate rabbitTemplate;
     private final TestMailSender testMailSender;
@@ -19,6 +20,6 @@ public class MessageConsumer {
 
     @RabbitListener(queues = "${rabbitmq.queue}")
     public void receiveMessage(Message message) throws jakarta.mail.MessagingException {
-        testMailSender.send("lesson 8 test");
+        testMailSender.send(messageText);
     }
 }
