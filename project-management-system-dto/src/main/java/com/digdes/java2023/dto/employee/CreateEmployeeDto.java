@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(description = "Сотрудник. Данные на вход по операциям редактирования/создания")
+@Schema(description = "Сотрудник. Данные на вход по операциям создания")
 public class CreateEmployeeDto {
 
     @Schema(description = "Фамилия")
@@ -28,6 +28,6 @@ public class CreateEmployeeDto {
     @Schema(description = "Логин")
     private String username;
 
-    @Schema(name = "пароль")
+    @Schema(name = "Пароль")
     private String password;
 }

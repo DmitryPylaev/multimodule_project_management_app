@@ -1,7 +1,7 @@
 package com.digdes.java2023.service;
 
 import com.digdes.java2023.dto.crew.CrewDto;
-import com.digdes.java2023.dto.crew.EditCrewDto;
+import com.digdes.java2023.dto.crew.AddCrewDto;
 import com.digdes.java2023.dto.employee.CreateEmployeeDto;
 import com.digdes.java2023.dto.employee.EmployeeDto;
 import com.digdes.java2023.dto.project.EditProjectDto;
@@ -37,10 +37,10 @@ class CrewServiceTest extends BaseTest{
 
     @Test
     void create() {
-        EditCrewDto editCrewDto = new EditCrewDto();
-        editCrewDto.setProjectRole(ProjectRole.QA);
-        editCrewDto.setCode("code17");
-        editCrewDto.setAccount("petr");
+        AddCrewDto addCrewDto = new AddCrewDto();
+        addCrewDto.setProjectRole(ProjectRole.QA);
+        addCrewDto.setCode("code17");
+        addCrewDto.setAccount("petr");
 
         CreateEmployeeDto employee = new CreateEmployeeDto();
         employee.setLastName("Петров");
@@ -68,7 +68,7 @@ class CrewServiceTest extends BaseTest{
         expect.setEmployee(expectEmployee);
         expect.setProjectRole(ProjectRole.QA);
 
-        Assertions.assertEquals(expect, crewService.add(editCrewDto));
+        Assertions.assertEquals(expect, crewService.add(addCrewDto));
     }
 
     @Test
@@ -86,11 +86,11 @@ class CrewServiceTest extends BaseTest{
         employee.setPassword("123");
         employeeService.create(employee);
 
-        EditCrewDto editCrewDto = new EditCrewDto();
-        editCrewDto.setProjectRole(ProjectRole.DEVELOPER);
-        editCrewDto.setCode("code17");
-        editCrewDto.setAccount("ivi");
-        crewService.add(editCrewDto);
+        AddCrewDto addCrewDto = new AddCrewDto();
+        addCrewDto.setProjectRole(ProjectRole.DEVELOPER);
+        addCrewDto.setCode("code17");
+        addCrewDto.setAccount("ivi");
+        crewService.add(addCrewDto);
 
         EmployeeDto expectEmployee = new EmployeeDto();
         expectEmployee.setDisplayName("Петров Петр Сергеевич");

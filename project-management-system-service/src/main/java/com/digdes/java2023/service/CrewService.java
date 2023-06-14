@@ -1,7 +1,7 @@
 package com.digdes.java2023.service;
 
 import com.digdes.java2023.dto.crew.CrewDto;
-import com.digdes.java2023.dto.crew.EditCrewDto;
+import com.digdes.java2023.dto.crew.AddCrewDto;
 import com.digdes.java2023.mapping.CrewMapper;
 import com.digdes.java2023.model.crew.ProjectAssignment;
 import com.digdes.java2023.model.employee.Employee;
@@ -23,13 +23,13 @@ public class CrewService {
     private EmployeeRepository employeeRepository;
     private ProjectRepository projectRepository;
 
-    public CrewDto add(EditCrewDto editCrewDto) {
+    public CrewDto add(AddCrewDto addCrewDto) {
         ProjectAssignment projectAssignment = new ProjectAssignment();
-        Project project = projectRepository.findByCode(editCrewDto.getCode()).orElseThrow();
-        Employee employee = employeeRepository.findByAccount(editCrewDto.getAccount()).orElseThrow();
+        Project project = projectRepository.findByCode(addCrewDto.getCode()).orElseThrow();
+        Employee employee = employeeRepository.findByAccount(addCrewDto.getAccount()).orElseThrow();
         projectAssignment.setProject(project);
         projectAssignment.setEmployee(employee);
-        projectAssignment.setProject_role(editCrewDto.getProjectRole());
+        projectAssignment.setProject_role(addCrewDto.getProjectRole());
         crewRepository.save(projectAssignment);
         return CrewMapper.mapFromEntity(projectAssignment);
     }
