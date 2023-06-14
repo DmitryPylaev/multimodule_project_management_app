@@ -81,6 +81,7 @@ public class TaskService {
         return new TaskDto();
     }
 
+    // TODO: 14.06.2023 Сделать логику поиска через фильтры specification 
 //    public List<EmployeeDto> find(String input) {
 //        List<Employee> employeeList = employeeRepository.findByEmployeeStatusAndLastNameContainingOrNameContainingOrPatronymicContainingOrAccountContainingOrEmailContaining(
 //                EmployeeStatus.ACTIVE,
