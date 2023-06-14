@@ -35,6 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         employee.setName("admin");
         employee.setEmployeeStatus(EmployeeStatus.ACTIVE);
         employee.setUsername("root");
+        employee.setAccount("admin");
         employee.setPassword(passwordEncoder.encode("root"));
         Optional<Employee> admin = employeeRepository.findByUsername("root");
         if (admin.isEmpty()) {
