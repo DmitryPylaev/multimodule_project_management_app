@@ -2,6 +2,7 @@ package com.digdes.java2023.service;
 
 import com.digdes.java2023.dto.crew.CrewDto;
 import com.digdes.java2023.dto.crew.AddCrewDto;
+import com.digdes.java2023.dto.crew.DeleteCrewDto;
 import com.digdes.java2023.mapping.CrewMapper;
 import com.digdes.java2023.model.crew.ProjectAssignment;
 import com.digdes.java2023.model.employee.Employee;
@@ -25,8 +26,8 @@ public class CrewService {
 
     public CrewDto add(AddCrewDto addCrewDto) {
         ProjectAssignment projectAssignment = new ProjectAssignment();
-        Project project = projectRepository.findByCode(addCrewDto.getCode()).orElseThrow();
-        Employee employee = employeeRepository.findByAccount(addCrewDto.getAccount()).orElseThrow();
+        Project project = projectRepository.findByCode(addCrewDto.getProjectCode()).orElseThrow();
+        Employee employee = employeeRepository.findByAccount(addCrewDto.getEmployeeAccount()).orElseThrow();
         projectAssignment.setProject(project);
         projectAssignment.setEmployee(employee);
         projectAssignment.setProject_role(addCrewDto.getProjectRole());
@@ -34,9 +35,9 @@ public class CrewService {
         return CrewMapper.mapFromEntity(projectAssignment);
     }
 
-    public CrewDto delete(String code, String account) {
-        Project project = projectRepository.findByCode(code).orElseThrow();
-        Employee employee = employeeRepository.findByAccount(account).orElseThrow();
+    public CrewDto delete(DeleteCrewDto deleteCrewDto) {
+        Project project = projectRepository.findByCode(deleteCrewDto.getProjectCode()).orElseThrow();
+        Employee employee = employeeRepository.findByAccount(deleteCrewDto.getEmployeeAccount()).orElseThrow();
         Optional<ProjectAssignment> projectAssignment = crewRepository.findByProjectIdAndEmployeeId(project.getId(), employee.getId());
         if (projectAssignment.isPresent()) {
             crewRepository.delete(projectAssignment.get());

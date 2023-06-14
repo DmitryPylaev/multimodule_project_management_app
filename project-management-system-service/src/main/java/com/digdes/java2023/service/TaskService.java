@@ -30,13 +30,10 @@ public class TaskService {
         Employee employee = employeeRepository.findByAccount(taskDto.getEmployee()).orElseThrow();
         task.setEmployee(employee);
         task.setTaskStatus(TaskStatus.NEW);
-        if (SecurityContextHolder.getContext().getAuthentication()!=null) task.setAuthor(employeeRepository
-                .findByUsername(SecurityContextHolder
-                        .getContext()
-                        .getAuthentication()
-                        .getName())
-                .orElseThrow());
-        else task.setAuthor(employee);
+        String author = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (author != null) {
+            task.setAuthor(employeeRepository.findByUsername(author).orElseThrow());
+        } else task.setAuthor(employee);
         task.setCreateDate(LocalDateTime.now());
         task.setChangeDate(LocalDateTime.now());
         taskRepository.save(task);
@@ -68,8 +65,14 @@ public class TaskService {
         if (taskFromBase.isPresent()) {
             Task task = taskFromBase.get();
             switch (task.getTaskStatus()) {
-                case NEW -> task.setTaskStatus(TaskStatus.IN_PROGRESS);
-                case IN_PROGRESS -> task.setTaskStatus(TaskStatus.DONE);
+                case NEW -> {
+                    task.setTaskStatus(TaskStatus.IN_PROGRESS);
+                    task.setChangeDate(LocalDateTime.now());
+                }
+                case IN_PROGRESS -> {
+                    task.setTaskStatus(TaskStatus.DONE);
+                    task.setChangeDate(LocalDateTime.now());
+                }
                 case DONE -> task.setTaskStatus(TaskStatus.CLOSED);
             }
             taskRepository.save(task);

@@ -1,6 +1,7 @@
 package com.digdes.java2023.service;
 
 import com.digdes.java2023.dto.project.EditProjectDto;
+import com.digdes.java2023.dto.project.FindProjectDto;
 import com.digdes.java2023.dto.project.ProjectDto;
 import com.digdes.java2023.model.project.ProjectStatus;
 import org.junit.jupiter.api.Assertions;
@@ -68,6 +69,10 @@ class ProjectServiceTest extends BaseTest{
         project.setDescription("Not description");
         service.create(project);
 
+        FindProjectDto findProjectDto = new FindProjectDto();
+        findProjectDto.setStatuses(List.of(new ProjectStatus[]{ProjectStatus.PREPARE}));
+        findProjectDto.setInput("22");
+
         ProjectDto expect = new ProjectDto();
         expect.setCode("code22");
         expect.setName("bond");
@@ -76,16 +81,13 @@ class ProjectServiceTest extends BaseTest{
 
         List<ProjectDto> expectList = new ArrayList<>();
         expectList.add(expect);
-        List<ProjectStatus> statuses = new ArrayList<>(List.of(new ProjectStatus[]{ProjectStatus.PREPARE}));
-        Assertions.assertEquals(expectList, service.find(statuses,"22"));
+
+        Assertions.assertEquals(expectList, service.find(findProjectDto));
     }
 
     @Test
-    void changeStatus() {
+    void shiftStatus() {
         create();
-
-        EditProjectDto project = new EditProjectDto();
-        project.setCode("code17");
 
         ProjectDto expect = new ProjectDto();
         expect.setCode("code17");
@@ -93,6 +95,6 @@ class ProjectServiceTest extends BaseTest{
         expect.setDescription("very top secret");
         expect.setProjectStatus(ProjectStatus.DEVELOP);
 
-        Assertions.assertEquals(expect, service.changeStatus(project));
+        Assertions.assertEquals(expect, service.shiftStatus("code17"));
     }
 }

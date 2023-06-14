@@ -1,6 +1,7 @@
 package com.digdes.java2023.service;
 
 import com.digdes.java2023.dto.project.EditProjectDto;
+import com.digdes.java2023.dto.project.FindProjectDto;
 import com.digdes.java2023.dto.project.ProjectDto;
 import com.digdes.java2023.mapping.ProjectMapper;
 import com.digdes.java2023.model.project.Project;
@@ -35,10 +36,10 @@ public class ProjectService {
         return new ProjectDto();
     }
 
-    public List<ProjectDto> find(List<ProjectStatus> projectStatuses, String input) {
+    public List<ProjectDto> find(FindProjectDto findProjectDto) {
         List<Project> projectList = projectRepository.find(
-                projectStatuses,
-                input);
+                findProjectDto.getStatuses(),
+                findProjectDto.getInput());
         List<ProjectDto> result = new ArrayList<>();
         for (Project project : projectList) {
             result.add(ProjectMapper.mapFromEntity(project));
@@ -46,8 +47,8 @@ public class ProjectService {
         return result;
     }
 
-    public ProjectDto changeStatus(EditProjectDto projectDto) {
-        Optional<Project> projectFromBase = projectRepository.findByCode(projectDto.getCode());
+    public ProjectDto shiftStatus(String projectCode) {
+        Optional<Project> projectFromBase = projectRepository.findByCode(projectCode);
         if (projectFromBase.isPresent()) {
             Project project = projectFromBase.get();
             switch (project.getProjectStatus()) {
