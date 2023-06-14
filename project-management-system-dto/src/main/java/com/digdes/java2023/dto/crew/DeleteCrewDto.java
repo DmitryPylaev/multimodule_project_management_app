@@ -1,19 +1,15 @@
 package com.digdes.java2023.dto.crew;
 
-import com.digdes.java2023.model.crew.ProjectRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+@Schema(description = "Проект. Данные на вход по операции удаления")
 @Data
-@Schema(description = "Проект. Данные на вход по операции добавления")
-public class AddCrewDto {
+public class DeleteCrewDto {
 
     @Schema(description = "Код проекта")
     private String projectCode;
 
     @Schema(description = "Учетная запись сотрудинка")
     private String employeeAccount;
-
-    @Schema(description = "Роль сотрудника в проекте")
-    private ProjectRole projectRole;
 }
