@@ -46,6 +46,9 @@ public class TaskService {
         } else task.setAuthor(employee);
         task.setCreateDate(LocalDateTime.now());
         task.setChangeDate(LocalDateTime.now());
+
+        task.checkEstimate();
+
         taskRepository.save(task);
         if (employee.getEmail()!=null) {
             TestMailSender.address = employee.getEmail();
@@ -75,14 +78,8 @@ public class TaskService {
         if (taskFromBase.isPresent()) {
             Task task = taskFromBase.get();
             switch (task.getTaskStatus()) {
-                case NEW -> {
-                    task.setTaskStatus(TaskStatus.IN_PROGRESS);
-                    task.setChangeDate(LocalDateTime.now());
-                }
-                case IN_PROGRESS -> {
-                    task.setTaskStatus(TaskStatus.DONE);
-                    task.setChangeDate(LocalDateTime.now());
-                }
+                case NEW -> task.setTaskStatus(TaskStatus.IN_PROGRESS);
+                case IN_PROGRESS -> task.setTaskStatus(TaskStatus.DONE);
                 case DONE -> task.setTaskStatus(TaskStatus.CLOSED);
             }
             taskRepository.save(task);
