@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Optional<Employee> findByAccount(String account);
     Optional<Employee> findByUsername(String username);
+    Optional<Employee> findByUsernameAndEmployeeStatus(String username, EmployeeStatus employeeStatus);
 
     Page<Employee> findByEmployeeStatusAndLastNameContainingOrNameContainingOrPatronymicContainingOrAccountContainingOrEmailContaining(
             EmployeeStatus employeeStatus,
