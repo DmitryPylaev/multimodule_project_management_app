@@ -22,14 +22,14 @@ public class CrewController {
     CrewService crewService;
 
     @Operation(summary = "Добавление участника")
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CrewDto add(@RequestBody AddCrewDto dto) {
         log.info("В методе контроллера Crew::add");
         return crewService.add(dto);
     }
 
     @Operation(summary = "Удаление участника проекта")
-    @DeleteMapping(value = "/delete", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CrewDto delete(@RequestBody DeleteCrewDto dto) {
         log.info("В методе контроллера Crew::delete");
         return crewService.delete(dto);

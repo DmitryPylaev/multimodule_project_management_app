@@ -22,14 +22,14 @@ public class ProjectController {
     ProjectService projectService;
 
     @Operation(summary = "Создание проекта")
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ProjectDto create(@RequestBody EditProjectDto dto) {
         log.info("В методе контроллера Project::create");
         return projectService.create(dto);
     }
 
     @Operation(summary = "Изменение проекта")
-    @PostMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ProjectDto edit(@RequestBody EditProjectDto dto) {
         log.info("В методе контроллера Project::edit");
         return projectService.edit(dto);
@@ -38,7 +38,7 @@ public class ProjectController {
     @Operation(summary = "Поиск проекта по текстовому значению, которое проверяется по атрибутам:" +
             " Наименование, Код" +
             " и списку фильтров по статусам проектов")
-    @PostMapping(value = "/find", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/find", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ProjectDto> find(@RequestBody FindProjectDto dto) {
         log.info("В методе контроллера Project::find");
         return projectService.find(dto);

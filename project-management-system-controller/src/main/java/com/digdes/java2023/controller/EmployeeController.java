@@ -22,14 +22,14 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @Operation(summary = "Внесение сотрудника")
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public EmployeeDto create(@RequestBody CreateEmployeeDto employeeDto) {
         log.info("В методе контроллера Employee::create");
         return employeeService.create(employeeDto);
     }
 
     @Operation(summary = "Изменение существующей записи о сотруднике")
-    @PostMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public EmployeeDto edit(@RequestBody EditEmployeeDto employeeDto) {
         log.info("В методе контроллера Employee::edit");
         return employeeService.edit(employeeDto);

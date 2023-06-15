@@ -22,14 +22,14 @@ public class TaskController {
     TaskService taskService;
 
     @Operation(summary = "Создание задачи")
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public TaskDto create(@RequestBody EditTaskDto dto) {
         log.info("В методе контроллера Task::create");
         return taskService.create(dto);
     }
 
     @Operation(summary = "Изменение задачи")
-    @PostMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public TaskDto edit(@RequestBody EditTaskDto dto) {
         log.info("В методе контроллера Task::edit");
         return taskService.edit(dto);
@@ -38,7 +38,7 @@ public class TaskController {
     @Operation(summary = "Поиск задачи по текстовому значению по Наименованию задачи " +
             "с приминением фильтров:" +
             " Статус задачи, Исполнитель, Автор, период крайнего срока, период создания задачи")
-    @PostMapping(value = "/find", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/find", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<TaskDto> find(@RequestBody FindTaskDto dto) {
         log.info("В методе контроллера Task::find");
         return taskService.find(dto);
