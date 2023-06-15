@@ -1,4 +1,4 @@
-package com.digdes.java2023.repository.filter;
+package com.digdes.java2023.service.filter;
 
 import com.digdes.java2023.model.employee.Employee;
 import com.digdes.java2023.model.task.TaskStatus;

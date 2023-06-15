@@ -12,11 +12,12 @@ import com.digdes.java2023.model.task.Task;
 import com.digdes.java2023.model.task.TaskStatus;
 import com.digdes.java2023.repository.EmployeeRepository;
 import com.digdes.java2023.repository.TaskRepository;
-import com.digdes.java2023.repository.filter.TaskFilter;
-import com.digdes.java2023.repository.filter.TaskSpecification;
+import com.digdes.java2023.service.filter.TaskFilter;
+import com.digdes.java2023.service.filter.TaskSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -91,7 +92,7 @@ public class TaskService {
     }
 
     public List<TaskDto> find(FindTaskDto dto) {
-        Pageable firstPageWithTenElements = PageRequest.of(0, 10);
+        Pageable firstPageWithTenElements = PageRequest.of(0, 10, Sort.by("createDate").descending());
         List<TaskDto> result = new ArrayList<>();
         TaskFilter taskFilter = new TaskFilter();
         taskFilter.setTaskStatus(dto.getTaskStatus());

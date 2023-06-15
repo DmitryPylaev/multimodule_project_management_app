@@ -1,4 +1,4 @@
-package com.digdes.java2023.repository.filter;
+package com.digdes.java2023.service.filter;
 
 import com.digdes.java2023.model.task.Task;
 import jakarta.persistence.criteria.Predicate;
@@ -17,7 +17,7 @@ public class TaskSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             if (!ObjectUtils.isEmpty(taskFilter.getName()))
-                predicates.add(criteriaBuilder.equal(root.get("name"), taskFilter.getName()));
+                predicates.add(criteriaBuilder.like(root.get("name"), taskFilter.getName()));
 
             if (!ObjectUtils.isEmpty(taskFilter.getTaskStatus()))
                 predicates.add(criteriaBuilder.equal(root.get("taskStatus"), taskFilter.getTaskStatus()));
