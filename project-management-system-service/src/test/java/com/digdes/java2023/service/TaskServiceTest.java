@@ -2,6 +2,7 @@ package com.digdes.java2023.service;
 
 import com.digdes.java2023.dto.employee.CreateEmployeeDto;
 import com.digdes.java2023.dto.task.EditTaskDto;
+import com.digdes.java2023.dto.task.FindTaskDto;
 import com.digdes.java2023.dto.task.TaskDto;
 import com.digdes.java2023.model.task.TaskStatus;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +13,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @SpringBootTest(classes = {EmployeeService.class})
 @EnableAutoConfiguration
@@ -46,14 +50,14 @@ class TaskServiceTest extends BaseTest{
 
         editTaskDto.setEmployee("petr");
 
-        TaskDto expectedTask = taskService.create(editTaskDto);
+        TaskDto taskDto = taskService.create(editTaskDto);
 
-        Assertions.assertEquals("task1", expectedTask.getName());
-        Assertions.assertEquals("important", expectedTask.getDescription());
-        Assertions.assertEquals(5, expectedTask.getEstimate());
-        Assertions.assertEquals("2023-08-16", expectedTask.getDeadline());
-        Assertions.assertEquals("petr", expectedTask.getEmployee());
-        Assertions.assertEquals(TaskStatus.NEW, expectedTask.getTaskStatus());
+        Assertions.assertEquals("task1", taskDto.getName());
+        Assertions.assertEquals("important", taskDto.getDescription());
+        Assertions.assertEquals(5, taskDto.getEstimate());
+        Assertions.assertEquals("2023-08-16", taskDto.getDeadline());
+        Assertions.assertEquals("petr", taskDto.getEmployee());
+        Assertions.assertEquals(TaskStatus.NEW, taskDto.getTaskStatus());
     }
 
     @Test
@@ -65,56 +69,58 @@ class TaskServiceTest extends BaseTest{
         editTaskDto.setDescription("prioritized");
         editTaskDto.setEstimate(4);
 
-        TaskDto expectedTask = taskService.edit(editTaskDto);
+        TaskDto taskDto = taskService.edit(editTaskDto);
 
-        Assertions.assertEquals("task1", expectedTask.getName());
-        Assertions.assertEquals("prioritized", expectedTask.getDescription());
-        Assertions.assertEquals(4, expectedTask.getEstimate());
-        Assertions.assertEquals("2023-08-16", expectedTask.getDeadline());
-        Assertions.assertEquals("petr", expectedTask.getEmployee());
-        Assertions.assertEquals(TaskStatus.NEW, expectedTask.getTaskStatus());
+        Assertions.assertEquals("task1", taskDto.getName());
+        Assertions.assertEquals("prioritized", taskDto.getDescription());
+        Assertions.assertEquals(4, taskDto.getEstimate());
+        Assertions.assertEquals("2023-08-16", taskDto.getDeadline());
+        Assertions.assertEquals("petr", taskDto.getEmployee());
+        Assertions.assertEquals(TaskStatus.NEW, taskDto.getTaskStatus());
     }
 
     @Test
     void shift() {
         create();
 
-        TaskDto expectedTask = taskService.shiftStatus("task1");
+        TaskDto taskDto = taskService.shiftStatus("task1");
 
-        Assertions.assertEquals("task1", expectedTask.getName());
-        Assertions.assertEquals("important", expectedTask.getDescription());
-        Assertions.assertEquals(5, expectedTask.getEstimate());
-        Assertions.assertEquals("2023-08-16", expectedTask.getDeadline());
-        Assertions.assertEquals("petr", expectedTask.getEmployee());
-        Assertions.assertEquals(TaskStatus.IN_PROGRESS, expectedTask.getTaskStatus());
+        Assertions.assertEquals("task1", taskDto.getName());
+        Assertions.assertEquals("important", taskDto.getDescription());
+        Assertions.assertEquals(5, taskDto.getEstimate());
+        Assertions.assertEquals("2023-08-16", taskDto.getDeadline());
+        Assertions.assertEquals("petr", taskDto.getEmployee());
+        Assertions.assertEquals(TaskStatus.IN_PROGRESS, taskDto.getTaskStatus());
     }
 
 
-//    @Test
-//    void find() {
-//        create();
-//
-//        CreateEmployeeDto employee = new CreateEmployeeDto();
-//        employee.setLastName("Иванов");
-//        employee.setName("Петр");
-//        employee.setPatronymic("Павлович");
-//        employee.setPosition("Java Developer");
-//        employee.setAccount("ivi");
-//        employee.setEmail("iv@mail.ru");
-//        employee.setUsername("user1");
-//        employee.setPassword("123");
-//        employeeService.create(employee);
-//
-//        EmployeeDto expect1 = new EmployeeDto();
-//        expect1.setDisplayName("Иванов Петр Павлович");
-//        expect1.setPosition("Java Developer");
-//        expect1.setAccount("ivi");
-//        expect1.setEmail("iv@mail.ru");
-//        expect1.setEmployeeStatus(EmployeeStatus.ACTIVE);
-//
-//        List<EmployeeDto> employeeDtoList = new ArrayList<>();
-//        employeeDtoList.add(expect1);
-//        Assertions.assertEquals(employeeDtoList, employeeService.find("mail"));
-//    }
+    @Test
+    void find() {
+        create();
+
+        EditTaskDto editTaskDto = new EditTaskDto();
+        editTaskDto.setName("task1");
+
+        TaskDto expectedTask = taskService.edit(editTaskDto);
+
+        FindTaskDto dto = new FindTaskDto();
+        dto.setName("task1");
+        dto.setTaskStatus(TaskStatus.NEW);
+        dto.setEmployee("petr");
+        dto.setAuthor("petr");
+        dto.setDeadlineMin(LocalDate.parse("2023-07-16"));
+        dto.setDeadlineMax(LocalDate.parse("2023-08-17"));
+        dto.setCreateDateMin(LocalDateTime.parse("2023-06-14T11:30"));
+        dto.setCreateDateMax(LocalDateTime.parse("2023-06-20T11:32"));
+
+        TaskDto taskDto = taskService.find(dto).get(0);
+
+        Assertions.assertEquals(expectedTask.getName(), taskDto.getName());
+        Assertions.assertEquals(expectedTask.getTaskStatus(), taskDto.getTaskStatus());
+        Assertions.assertEquals(expectedTask.getEmployee(), taskDto.getEmployee());
+        Assertions.assertEquals(expectedTask.getAuthor(), taskDto.getAuthor());
+        Assertions.assertEquals(expectedTask.getDeadline(), taskDto.getDeadline());
+        Assertions.assertEquals(expectedTask.getCreateDate().substring(0,16), taskDto.getCreateDate().substring(0,16));
+    }
 
 }

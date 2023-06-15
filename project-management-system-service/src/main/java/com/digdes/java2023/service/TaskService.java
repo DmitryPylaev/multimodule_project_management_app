@@ -3,6 +3,7 @@ package com.digdes.java2023.service;
 import com.digdes.java2023.amqp.MessageConsumer;
 import com.digdes.java2023.amqp.MessageProducer;
 import com.digdes.java2023.dto.task.EditTaskDto;
+import com.digdes.java2023.dto.task.FindTaskDto;
 import com.digdes.java2023.dto.task.TaskDto;
 import com.digdes.java2023.mail.TestMailSender;
 import com.digdes.java2023.mapping.TaskMapper;
@@ -11,11 +12,17 @@ import com.digdes.java2023.model.task.Task;
 import com.digdes.java2023.model.task.TaskStatus;
 import com.digdes.java2023.repository.EmployeeRepository;
 import com.digdes.java2023.repository.TaskRepository;
+import com.digdes.java2023.repository.filter.TaskFilter;
+import com.digdes.java2023.repository.filter.TaskSpecification;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,9 +37,9 @@ public class TaskService {
         Employee employee = employeeRepository.findByAccount(taskDto.getEmployee()).orElseThrow();
         task.setEmployee(employee);
         task.setTaskStatus(TaskStatus.NEW);
-        String author = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (author != null) {
-            task.setAuthor(employeeRepository.findByUsername(author).orElseThrow());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            task.setAuthor(employeeRepository.findByUsername(authentication.getName()).orElseThrow());
         } else task.setAuthor(employee);
         task.setCreateDate(LocalDateTime.now());
         task.setChangeDate(LocalDateTime.now());
@@ -81,20 +88,44 @@ public class TaskService {
         return new TaskDto();
     }
 
-    // TODO: 14.06.2023 Сделать логику поиска через фильтры specification 
-//    public List<EmployeeDto> find(String input) {
-//        List<Employee> employeeList = employeeRepository.findByEmployeeStatusAndLastNameContainingOrNameContainingOrPatronymicContainingOrAccountContainingOrEmailContaining(
-//                EmployeeStatus.ACTIVE,
-//                input,
-//                input,
-//                input,
-//                input,
-//                input);
-//        List<EmployeeDto> result = new ArrayList<>();
-//        for (Employee employee : employeeList) {
-//            result.add(EmployeeMapper.mapFromEntity(employee));
-//        }
-//        return result;
-//    }
+    public List<TaskDto> find(FindTaskDto dto) {
+//        DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//
+//        LocalDate deadlineMin = LocalDate.parse(dto.getDeadlineMin().format(formatterDate));
+//        LocalDate deadlineMax = LocalDate.parse(dto.getDeadlineMax().format(formatterDate));
+//        LocalDateTime createDateMin = LocalDateTime.parse(dto.getCreateDateMin(), formatterDateTime);
+//        LocalDateTime createDateMax = LocalDateTime.parse(dto.getCreateDateMax(), formatterDateTime);
+
+        List<TaskDto> result = new ArrayList<>();
+
+        TaskFilter taskFilter = new TaskFilter();
+        taskFilter.setTaskStatus(dto.getTaskStatus());
+
+        if (!ObjectUtils.isEmpty(dto.getEmployee())) {
+            Optional<Employee> employee = employeeRepository.findByAccount(dto.getEmployee());
+            if (employee.isEmpty()) return result;
+            else taskFilter.setEmployee(employee.orElseThrow());
+        }
+
+        if (!ObjectUtils.isEmpty(dto.getAuthor())) {
+            Optional<Employee> author = employeeRepository.findByAccount(dto.getAuthor());
+            if (author.isEmpty()) return result;
+            else taskFilter.setAuthor(author.orElseThrow());
+        }
+
+        taskFilter.setDeadlineMin(dto.getDeadlineMin());
+        taskFilter.setDeadlineMax(dto.getDeadlineMax());
+        taskFilter.setCreateDateMin(dto.getCreateDateMin());
+        taskFilter.setCreateDateMax(dto.getCreateDateMax());
+
+        List<Task> tasks = taskRepository.findAll(TaskSpecification.getSpec(taskFilter));
+
+
+        for (Task item:tasks) {
+            result.add(TaskMapper.mapFromEntity(item));
+        }
+        return result;
+    }
 
 }
