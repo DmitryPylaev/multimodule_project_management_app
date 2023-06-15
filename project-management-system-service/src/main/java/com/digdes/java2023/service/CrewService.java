@@ -30,6 +30,10 @@ public class CrewService {
         ProjectAssignment projectAssignment = new ProjectAssignment();
         Project project = projectRepository.findByCode(addCrewDto.getProjectCode()).orElseThrow();
         Employee employee = employeeRepository.findByAccount(addCrewDto.getEmployeeAccount()).orElseThrow();
+
+        Optional<ProjectAssignment> projectAssignmentExist = crewRepository.findByProjectIdAndEmployeeId(project.getId(), employee.getId());
+        if (projectAssignmentExist.isPresent()) return new CrewDto();
+
         projectAssignment.setProject(project);
         projectAssignment.setEmployee(employee);
         projectAssignment.setProject_role(addCrewDto.getProjectRole());
