@@ -11,6 +11,8 @@ import com.digdes.java2023.repository.CrewRepository;
 import com.digdes.java2023.repository.EmployeeRepository;
 import com.digdes.java2023.repository.ProjectRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,13 +49,13 @@ public class CrewService {
     }
 
     public List<CrewDto> getByProject(String code) {
+        Pageable firstPageWithTenElements = PageRequest.of(0, 10);
         List<CrewDto> result = new ArrayList<>();
         Project project = projectRepository.findByCode(code).orElseThrow();
-        List<ProjectAssignment> projectAssignmentList = crewRepository.findByProjectId(project.getId());
+        List<ProjectAssignment> projectAssignmentList = crewRepository.findByProjectId(project.getId(), firstPageWithTenElements);
 
-        for (ProjectAssignment item:projectAssignmentList) {
-            result.add(CrewMapper.mapFromEntity(item));
-        }
+        projectAssignmentList.forEach(o -> result.add(CrewMapper.mapFromEntity(o)));
+
         return result;
     }
 }

@@ -68,9 +68,9 @@ public class EmployeeService {
                 input,
                 firstPageWithTenElements);
         List<EmployeeDto> result = new ArrayList<>();
-        for (Employee employee : employeeList) {
-            result.add(EmployeeMapper.mapFromEntity(employee));
-        }
+
+        employeeList.forEach(o ->  result.add(EmployeeMapper.mapFromEntity(o)));
+
         return result;
     }
 

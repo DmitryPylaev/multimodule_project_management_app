@@ -41,9 +41,9 @@ public class ProjectService {
                 findProjectDto.getStatuses(),
                 findProjectDto.getInput());
         List<ProjectDto> result = new ArrayList<>();
-        for (Project project : projectList) {
-            result.add(ProjectMapper.mapFromEntity(project));
-        }
+
+        projectList.forEach(o -> result.add(ProjectMapper.mapFromEntity(o)));
+
         return result;
     }
 

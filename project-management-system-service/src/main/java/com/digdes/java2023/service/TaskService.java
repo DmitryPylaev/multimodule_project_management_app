@@ -15,6 +15,8 @@ import com.digdes.java2023.repository.TaskRepository;
 import com.digdes.java2023.repository.filter.TaskFilter;
 import com.digdes.java2023.repository.filter.TaskSpecification;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -89,16 +91,8 @@ public class TaskService {
     }
 
     public List<TaskDto> find(FindTaskDto dto) {
-//        DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//        LocalDate deadlineMin = LocalDate.parse(dto.getDeadlineMin().format(formatterDate));
-//        LocalDate deadlineMax = LocalDate.parse(dto.getDeadlineMax().format(formatterDate));
-//        LocalDateTime createDateMin = LocalDateTime.parse(dto.getCreateDateMin(), formatterDateTime);
-//        LocalDateTime createDateMax = LocalDateTime.parse(dto.getCreateDateMax(), formatterDateTime);
-
+        Pageable firstPageWithTenElements = PageRequest.of(0, 10);
         List<TaskDto> result = new ArrayList<>();
-
         TaskFilter taskFilter = new TaskFilter();
         taskFilter.setTaskStatus(dto.getTaskStatus());
 
@@ -119,12 +113,10 @@ public class TaskService {
         taskFilter.setCreateDateMin(dto.getCreateDateMin());
         taskFilter.setCreateDateMax(dto.getCreateDateMax());
 
-        List<Task> tasks = taskRepository.findAll(TaskSpecification.getSpec(taskFilter));
+        List<Task> tasks = taskRepository.findAll(TaskSpecification.getSpec(taskFilter), firstPageWithTenElements).toList();
 
+        tasks.forEach(o -> result.add(TaskMapper.mapFromEntity(o)));
 
-        for (Task item:tasks) {
-            result.add(TaskMapper.mapFromEntity(item));
-        }
         return result;
     }
 
