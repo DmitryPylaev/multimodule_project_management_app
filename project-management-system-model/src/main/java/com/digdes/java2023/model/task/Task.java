@@ -12,6 +12,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "task")
@@ -54,4 +55,10 @@ public class Task implements Serializable {
 
     @Column(name = "changeDate")
     private LocalDateTime changeDate;
+
+    public void checkEstimate() {
+        long resultDays = ChronoUnit.DAYS.between(deadline, changeDate);
+        if (estimate < 0 | resultDays - estimate < 0) throw new RuntimeException("Estimate is too short");
+    }
+
 }
