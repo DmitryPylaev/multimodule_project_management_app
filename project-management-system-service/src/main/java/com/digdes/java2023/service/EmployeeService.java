@@ -33,7 +33,7 @@ public class EmployeeService {
     }
 
     public EmployeeDto edit(EditEmployeeDto employeeDto) {
-        Optional<Employee> employeeFromBase = employeeRepository.findByAccount(employeeDto.getAccount());
+        Optional<Employee> employeeFromBase = employeeRepository.findByAccountAndEmployeeStatus(employeeDto.getAccount(), EmployeeStatus.ACTIVE);
         if (employeeFromBase.isPresent()) {
             Employee employeeToSave = EmployeeMapper.editEntity(employeeDto, employeeFromBase.get());
             employeeRepository.save(employeeToSave);
