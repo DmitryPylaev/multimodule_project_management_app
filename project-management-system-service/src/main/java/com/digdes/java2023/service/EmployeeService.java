@@ -8,6 +8,9 @@ import com.digdes.java2023.model.employee.Employee;
 import com.digdes.java2023.model.employee.EmployeeStatus;
 import com.digdes.java2023.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,13 +58,15 @@ public class EmployeeService {
     }
 
     public List<EmployeeDto> find(String input) {
-        List<Employee> employeeList = employeeRepository.findByEmployeeStatusAndLastNameContainingOrNameContainingOrPatronymicContainingOrAccountContainingOrEmailContaining(
+        Pageable firstPageWithTenElements = PageRequest.of(0, 10);
+        Page<Employee> employeeList = employeeRepository.findByEmployeeStatusAndLastNameContainingOrNameContainingOrPatronymicContainingOrAccountContainingOrEmailContaining(
                 EmployeeStatus.ACTIVE,
                 input,
                 input,
                 input,
                 input,
-                input);
+                input,
+                firstPageWithTenElements);
         List<EmployeeDto> result = new ArrayList<>();
         for (Employee employee : employeeList) {
             result.add(EmployeeMapper.mapFromEntity(employee));
